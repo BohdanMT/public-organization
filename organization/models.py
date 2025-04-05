@@ -14,9 +14,9 @@ class City(models.Model):
 
 
 class User(AbstractUser):
-    phone_number = models.CharField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11, unique=True, null=True)
     email = models.EmailField(unique=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.phone_number}"
