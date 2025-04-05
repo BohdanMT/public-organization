@@ -5,10 +5,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from organization.models import Article
 
 
+class ArticleListView(LoginRequiredMixin, generic.ListView):
+    model = Article
+    template_name = "organization/article_list.html"
+    context_object_name = "articles"
+    paginate_by = 10
+
+
 class ArticleDetailView(LoginRequiredMixin, generic.DetailView):
     model = Article
     template_name = "organization/article_detail.html"
     context_object_name = "article"
+
 
 class ArticleCreateView(LoginRequiredMixin, generic.CreateView):
     model = Article
@@ -16,11 +24,13 @@ class ArticleCreateView(LoginRequiredMixin, generic.CreateView):
     fields = ["title", "content", "author"]
     success_url = reverse_lazy("article-list")
 
+
 class ArticleUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Article
     template_name = "organization/article_form.html"
     fields = ["title", "content", "author"]
     success_url = reverse_lazy("article-list")
+
 
 class ArticleDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Article
