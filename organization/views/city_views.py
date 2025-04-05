@@ -29,3 +29,8 @@ class CityDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = City
     template_name = "organization/city_confirm_delete.html"
     success_url = reverse_lazy("city-list")
+
+class CityDetailView(LoginRequiredMixin, generic.DetailView):
+    model = City
+    template_name = "organization/city_detail.html"
+    context_object_name = "city"
